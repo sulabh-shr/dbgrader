@@ -6,18 +6,14 @@ from src.sql.delete import MySqlDeleter
 from src.sql.execute import MySqlExecutor
 from src.sql.insert import MySqlInserter
 from src.sql.convert import MySqlQueryConverter
-from src.sql.specifics.parameters import ordered_view_names
 
 
 class MySqlGenerator:
-    def __init__(self, username, password, dbname='project',
-                 create_file=None):
+    def __init__(self, username, password, create_file, dbname='project'):
         self.username = username
         self.password = password
         self.dbname = dbname
-        if create_file is None:
-            this_path = os.path.dirname(__file__)
-            create_file = os.path.join(this_path, 'specifics', 'create_empty_tables_mysql.sql')
+
         self.create_file = create_file
         self._init_modules()
 
@@ -29,6 +25,7 @@ class MySqlGenerator:
         print(f'Using Database: {self.dbname}')
         self.conn.cursor().execute(f'CREATE DATABASE IF NOT EXISTS {self.dbname};')
         self.conn.cursor().execute(f'USE {self.dbname};')
+        self.conn.commit()
 
         self.deleter = MySqlDeleter(conn=self.conn)
         self.inserter = MySqlInserter(conn=self.conn)
@@ -40,7 +37,7 @@ class MySqlGenerator:
         self.executor.execute(self.create_file)
         self.inserter.insert(data=db)
 
-    def generate_answers(self, db, query, views=ordered_view_names):
+    def generate_answers(self, db, query, views):
         self._fill_db(db=db)
         self.executor.execute(query)
         answer_dict = {}
@@ -50,9 +47,8 @@ class MySqlGenerator:
             try:
                 cursor.execute(f'SELECT * FROM {view}')
             except mysql.connector.Error as err:
-                print('-' * 70)
-                print("Something went wrong: {}".format(err))
-                print('-' * 70)
+                print(f'{"-" * 70}\n>>> EXCEPTION OCCURRED FOR QUERY VIEW :-\n{view}')
+                print(f'\n>>> EXCEPTION MESSAGE :-\n{err}')
                 answer_dict[view] = None
                 continue
             answer_dict[view] = self.converter.query_to_json(cursor)

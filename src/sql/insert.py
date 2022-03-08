@@ -86,7 +86,6 @@ class OracleInserter(DbInserter):
 
         if commit:
             conn.commit()
-            print(f'Insertion commited.')
 
 
 class MySqlInserter(DbInserter):
@@ -122,4 +121,3 @@ class MySqlInserter(DbInserter):
 
         if commit:
             conn.commit()
-            print(f'Insertion commited.')

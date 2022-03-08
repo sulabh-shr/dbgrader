@@ -1,6 +1,7 @@
 import sys
 import mysql.connector
 from mysql.connector.cursor import MySQLCursor
+from mysql.connector import errorcode
 
 try:
     import cx_Oracle
@@ -83,11 +84,11 @@ class MySqlExecutor(Executor):
 
             # Remove comment from lines
             lines = block.split('\n')
-            block = '\n'.join([i for i in lines if not i.startswith('--')])
+            block = '\n'.join([i for i in lines if not (i.strip().startswith('--') or i == '')])
 
             try:
                 cursor.execute(block)
-            except Exception as exception:
+            except mysql.connector.Error as exception:
                 self._handle_exception(exception, block)
 
         if commit:
@@ -95,7 +96,12 @@ class MySqlExecutor(Executor):
 
     @staticmethod
     def _handle_exception(exception, block):
+        # Allow unknown table for drop command
+        if exception.errno == errorcode.ER_BAD_TABLE_ERROR and 'drop' in block:
+            return
+
         print(f'{"-"*70}\n>>> EXCEPTION OCCURRED FOR COMMAND :-\n{block}')
         print(f'\n>>> EXCEPTION MESSAGE :-\n{exception}')
         print('\n\nEXIT WITHOUT COMPLETING !')
+
         sys.exit(-1)

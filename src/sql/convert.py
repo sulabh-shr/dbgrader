@@ -48,12 +48,12 @@ class MySqlQueryConverter(QueryToJsonConverter):
                 if isinstance(row[col_idx], decimal.Decimal):
                     value = row[col_idx]
                     if int(value) == float(value):
-                        row_dict[col_name.upper()] = int(row[col_idx])
+                        row_dict[col_name] = int(row[col_idx])
                     else:
-                        row_dict[col_name.upper()] = float(row[col_idx])
+                        row_dict[col_name] = float(row[col_idx])
 
                 else:
-                    row_dict[col_name.upper()] = row[col_idx]
+                    row_dict[col_name] = row[col_idx]
             rows_dict_list.append(row_dict)
 
         return rows_dict_list
