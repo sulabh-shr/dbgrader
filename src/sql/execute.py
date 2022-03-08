@@ -1,3 +1,4 @@
+import sys
 import mysql.connector
 from mysql.connector.cursor import MySQLCursor
 
@@ -94,18 +95,7 @@ class MySqlExecutor(Executor):
 
     @staticmethod
     def _handle_exception(exception, block):
-        print(f'Exception occurred for command:\n{block}')
-        raise exception
-
-
-if __name__ == '__main__':
-    # import sys
-    #
-    # from connect import connect
-    # from credentials import username, password
-    #
-    # conn = connect(username, password)
-    #
-    # filepath = sys.argv[1]
-    # execute_file(file_path=file_path, conn=conn, commit=True)
-    pass
+        print(f'{"-"*70}\n>>> EXCEPTION OCCURRED FOR COMMAND :-\n{block}')
+        print(f'\n>>> EXCEPTION MESSAGE :-\n{exception}')
+        print('\n\nEXIT WITHOUT COMPLETING !')
+        sys.exit(-1)

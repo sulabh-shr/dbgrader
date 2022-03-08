@@ -69,7 +69,7 @@ class MySqlDeleter(DbDeleter):
         cursor.execute('SELECT DATABASE();')
         for result in cursor:
             db_name = result[0]
-        print(f'{db_name}')
+
         cursor.execute(f"DROP DATABASE {db_name};")
         cursor.execute(f"CREATE DATABASE {db_name};")
         cursor.execute(f"USE {db_name};")

@@ -116,7 +116,7 @@ class MySqlInserter(DbInserter):
             command1 = command1[:-1] + ')'
             command2 = command2[:-1] + ');'
             command = command1 + command2
-            print(command)
+
             for row in rows:
                 cursor.execute(command, row)
 
