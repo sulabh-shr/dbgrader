@@ -17,7 +17,7 @@ class MySqlGenerator:
         self.dbname = dbname
         if create_file is None:
             this_path = os.path.dirname(__file__)
-            create_file = os.path.join(this_path, 'specifics', 'create_empty_tables.sql')
+            create_file = os.path.join(this_path, 'specifics', 'create_empty_tables_mysql.sql')
         self.create_file = create_file
         self._init_modules()
 
@@ -26,6 +26,7 @@ class MySqlGenerator:
         self.conn = self.connector.connect()
 
         # Select database to use
+        print(f'Using Database: {self.dbname}')
         self.conn.cursor().execute(f'CREATE DATABASE IF NOT EXISTS {self.dbname};')
         self.conn.cursor().execute(f'USE {self.dbname};')
 
