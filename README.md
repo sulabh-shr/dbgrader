@@ -9,7 +9,7 @@
 5. Python Project setup
 6. Creating and updating credentials
 
-Detailed steps available in file installation_instructions.md
+Detailed steps available in file `installation_instructions.md`
 
 --------------------------------------------------------------------------------------------
 # Running Queries
