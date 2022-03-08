@@ -1,7 +1,18 @@
 # Auto-Grader for Database Queries
 
-
-# Installation Overview
+## Project structure
+```
+└── dbgrader                  # Project folder
+   |── src                    # Python source codes
+   |── testDBs                # Test databases
+   └── solution_sql           # Answer/Report generation
+      |── produce_answers.py
+      |── report.py
+      └── queries.sql         # Queries should be written here for generating answers
+ 
+```
+--------------------------------------------------------------------------------------------
+## Installation Overview
 1. Python installation  
 2. MySQL installation
 3. Code editors (Optional)
@@ -12,7 +23,7 @@
 Detailed steps available in file `installation_instructions.md`
 
 --------------------------------------------------------------------------------------------
-# Running Queries
+## Running Queries
 
 1. In your command line, go to the project folder and activate the python virtual environment using the command:
     ```
@@ -22,15 +33,15 @@ Detailed steps available in file `installation_instructions.md`
 3. In your command line, go to `solution_sql` folder while in `solution_sql` folder.   
    All subsequent steps need to be run in this folder.
 5. To generate the answers, use the command below. This creates the answers.json file
-```
-    python produce_answers.py
-```
+   ```
+       python produce_answers.py
+   ```
 5. To generate the report, use the command below. This creates the `report.json` file.
-```
-    python report.py
-```
+   ```
+       python report.py
+   ```
 --------------------------------------------------------------------------------------------
-# Important Notes
+## Important Notes
 
 1. All queries must be in queries.sql
 2. Do not include a semi-colon(;) in comments in any of the SQL file
