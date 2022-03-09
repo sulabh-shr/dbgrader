@@ -1,8 +1,19 @@
-import os
 import sys
+import os
 import json
 import copy
 from collections import OrderedDict
+
+
+def save_json(data, path):
+    with open(path, 'w') as f:
+        json.dump(data, f)
+
+
+def load_json(path):
+    with open(path, 'r') as f:
+        data = json.load(f)
+    return data
 
 
 def get_query_fields(dbs, queries):
@@ -19,14 +30,13 @@ def get_query_fields(dbs, queries):
     return fields
 
 
-with open(os.path.join('..', 'testDBs/correct_answers.json'), 'r') as f:
-    correct_answers = json.load(f)
-
-with open('answers.json', 'r') as f:
-    answers = json.load(f)
+correct_answers = load_json("../testDBs/correct_answers.json")
+answers = load_json("answers.json")
 
 dbs = [i for i in correct_answers]
-queries = [i for i in correct_answers[dbs[0]]]
+# queries = [i for i in correct_answers[dbs[0]]]
+with open(os.path.join('..', 'testDBs', 'view_names.json'), 'r') as f:
+    queries = json.load(f)['views']
 fields = get_query_fields(dbs, queries)
 
 report = OrderedDict({
@@ -83,7 +93,6 @@ for query_idx, query in enumerate(queries):
     if query_correct_all:
         report['perQueryReport'][query_idx]["correct"] = query_correct_all
         report["correctQueries"] += 1
-
 
 with open("report.json", "w") as f:
     f.write(json.dumps(report))
