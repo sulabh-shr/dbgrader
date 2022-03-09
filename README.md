@@ -45,9 +45,10 @@ Detailed steps available in file `installation_instructions.md`
 
 1. All queries must be in queries.sql
 2. Do not include a semi-colon(;) in comments in any of the SQL file
-3. Must use semicolon(;) after each command in the SQL file
-4. Do not change any of the database files inside the folder `testDBs`
-5. Do not change or add any file inside the folder `testDBs`
-6. Do not change `create_empty_tables.sql` file or its location
+3. Table names are case-sensitive
+4. Must use semicolon(;) after each command in the SQL file
+5. Do not change any of the database files inside the folder `testDBs`
+6. Do not change or add any file inside the folder `testDBs`
+7. Do not change `create_empty_tables.sql` file or its location
 
 --------------------------------------------------------------------------------------------
