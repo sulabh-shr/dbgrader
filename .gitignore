@@ -1,3 +1,9 @@
+solution_sql/queries.sql
+solution_sql/answers.json
+solution_sql/report.json
+testDBs/*.json
+testDBs/create_empty_tables*.sql
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
