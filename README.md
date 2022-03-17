@@ -27,14 +27,19 @@ The instructions might be more readable in the link above if the text reader doe
 --------------------------------------------------------------------------------------------
 ## Running Queries
 
-1. In your command line, go to the project folder and activate the python virtual environment using the command:
+1. If you created a virtual environment during installation, in your command line, go to the project folder and activate the python virtual environment.  
+--> For Ubuntu/Mac the command to activate it is
     ```
         source env/bin/activate 
+    ```
+   --> For Windows, the command to activate it is
+   ```
+        env/Source/activate.bat
     ```
 2. Write or copy/paste your queries in `queries.sql` located in `solution_sql` folder.
 3. In your command line, go to `solution_sql` folder while in `solution_sql` folder.   
    All subsequent steps need to be run in this folder.
-5. To generate the answers, use the command below. This creates the answers.json file
+4. To generate the answers, use the command below. This creates the answers.json file
    ```
        python produce_answers.py
    ```
