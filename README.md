@@ -20,7 +20,9 @@
 5. Python Project setup
 6. Creating and updating credentials
 
-Detailed steps available in file `installation_instructions.md`
+Detailed steps available in file `installation_instructions.md` which can also be found at:   
+https://github.com/sulabh-shr/dbgrader  
+The instructions might be more readable in the link above if the text reader does not format .md  file properly
 
 --------------------------------------------------------------------------------------------
 ## Running Queries
@@ -51,4 +53,4 @@ Detailed steps available in file `installation_instructions.md`
 6. Do not change or add any file inside the folder `testDBs`
 7. Do not change `create_empty_tables.sql` file or its location
 
---------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------_
