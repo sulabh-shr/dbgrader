@@ -61,18 +61,84 @@ Tutorial for python installation:
 https://realpython.com/installing-python/ 
 
 ### 2. MySQL
-Install MySQL Server community version. Go to URL: https://dev.mysql.com/downloads/mysql/  
---> Select Operating System  
---> Select OS Version (Select macOS 11 (ARM, 64-bit) for M1 processor)  
---> Download the necessary package (DMG archive for macOS)  
---> Install the downloaded package  
---> Remember the password for root user, it requires an 8 digit password. You must include this in your credentials.py file.  
+Install MySQL Server community version. 
+
+#### 2.A If you have the **latest** MacOS version:
+1. Go to URL: https://dev.mysql.com/downloads/mysql/  
+2. Select Operating System: macOS
+3. Select OS Version
+   1. Select macOS 11 (ARM, 64-bit) for M1 processor
+   2. Select macOS 11 (x86, 64-bit) for Intel processor
+4. Download the necessary package (DMG archive for macOS)
+5. Install the downloaded package
+6. During installation remember the password for root user. You must include this in your credentials.py file later.
+
+#### 2.B If you have an **older** MacOS version.  
+First try steps in **2.A** but a known issues with incompatible mysql version is that  
+*you will not be able to use the mysql icon in system preferences.*    
+In such cases, you will need to download an older version of mysql the steps for which are listed below.
+
+1. Find which mysql version works for your macOS by searching online.
+   1. For example. macOS 10.14.6 works with mysql 8.0.21
+2. Go to URL: https://downloads.mysql.com/archives/community/
+3. Select Product Version:
+   1. For example 8.0.21 
+4. Follow all the steps from **2.A** starting with step 2. 
+
+
 
 ### 3. Code Editor (Optional)
 --> Install/Use your preferred code editor. ATOM is suggested for better json visualization.
 
-**More steps below which are the same for Windows/Mac/Ubuntu**
+### 4. Virtual Environment
+Go to project folder in your command-prompt/bash using the change directory command.  
+The project folder is the one that has the file **setup.py** in it.  
+Run the following command one line at a time.
+```
+   python -m venv env
+   source env/bin/activate
+```
 
+### 5. Project Setup
+Following the previous step directly, make sure you are in the project folder in the command line.
+Run the following command in the same.
+```
+   pip install -e .
+```
+
+### 6. Credentials
+You can use the **already setup password** in the installation step.  
+For this, change the `credentials.py` file 
+with `root` as the username and the password you chose.  
+In this case, say you put your password as `applesauce` your `credentials.py` file should look like 
+```
+    username = 'root'
+    password = 'applesauce'
+```
+
+***(Optional: New user creation)***  
+If you opt to create a **new user**. You can do the following:
+
+Open `mysql` from command line using
+```
+    mysql -u root
+```
+Then, inside mysql command prompt, type the following lines of code one by one: 
+```
+USE mysql;  
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'password';  
+GRANT ALL PRIVILEGES ON *.* TO 'user1'@'localhost';  
+FLUSH PRIVILEGES;
+exit;
+```
+--> Following the exact command above creates a username `user1` with password `password`.   
+You can change it to your liking but make sure to update the credentials file accordingly.  
+--> Set your username and password provided in `credentials.py`.  
+If you used the exact same command as above, your `credentials.py` file should look like 
+```
+    username = 'user1'
+    password = 'password'
+```
 --------------------------------------------------------------------------------------------
 # Ubuntu
 
@@ -91,25 +157,6 @@ sudo apt install mysql-server
 **More steps below which are the same for Mac/Ubuntu**
 
 --------------------------------------------------------------------------------------------
-
-## Further steps for ALL
-
-### 4. Virtual Environment
-Go to project folder in your command-prompt/bash using the change directory command.  
-The project folder is the one that has the file **setup.py** in it.  
-Run the following command one line at a time.
-```
-   python -m venv env
-   source env/bin/activate
-```
-
-### 5. Project Setup
-Following the previous step directly, make sure you are in the project folder in the command line.
-Run the following command in the same.
-```
-   pip install -e .
-```
-
 
 ### 6. Credentials
 Open `mysql` from command line using
