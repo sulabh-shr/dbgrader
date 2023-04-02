@@ -68,7 +68,7 @@ class OracleExecutor(Executor):
 
 
 class MySqlExecutor(Executor):
-    def execute(self, filepath, commit=True):
+    def execute(self, filepath, commit=True, pretty_exit_on_error=True):
         conn = self.conn
         cursor = conn.cursor(buffered=True)
 
@@ -89,19 +89,21 @@ class MySqlExecutor(Executor):
             try:
                 cursor.execute(block)
             except mysql.connector.Error as exception:
-                self._handle_exception(exception, block)
+                self._handle_exception(exception, block, pretty_exit_on_error=pretty_exit_on_error)
 
         if commit:
             conn.commit()
 
     @staticmethod
-    def _handle_exception(exception, block):
+    def _handle_exception(exception, block, pretty_exit_on_error):
         # Allow unknown table for drop command
         if exception.errno == errorcode.ER_BAD_TABLE_ERROR and 'drop' in block:
             return
 
         print(f'{"-"*70}\n>>> EXCEPTION OCCURRED FOR COMMAND :-\n{block}')
         print(f'\n>>> EXCEPTION MESSAGE :-\n{exception}')
-        print('\n\nEXIT WITHOUT COMPLETING !')
-
-        sys.exit(-1)
+        if pretty_exit_on_error:
+            print('\n\nEXIT WITHOUT COMPLETING !')
+            sys.exit(-1)
+        else:
+            raise exception

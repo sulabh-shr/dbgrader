@@ -9,10 +9,11 @@ from src.sql.convert import MySqlQueryConverter
 
 
 class MySqlGenerator:
-    def __init__(self, username, password, create_file, dbname='project'):
+    def __init__(self, username, password, create_file, dbname='project', pretty_exit_on_error=True):
         self.username = username
         self.password = password
         self.dbname = dbname
+        self.pretty_exit_on_error = pretty_exit_on_error
 
         self.create_file = create_file
         self._init_modules()
@@ -42,7 +43,7 @@ class MySqlGenerator:
         
     def generate_answers(self, db, query, views):
         self._fill_db(db=db)
-        self.executor.execute(query)
+        self.executor.execute(query, pretty_exit_on_error=self.pretty_exit_on_error)
         answer_dict = {}
 
         for view in views:
