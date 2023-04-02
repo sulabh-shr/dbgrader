@@ -24,7 +24,7 @@ setup(
     author='Sulabh Shrestha',
     author_email='sshres2@gmu.edu',
     description='Database query graders',
-    long_description=read('README.md'),
+    long_description='',
     url='https://github.com/sulabh-shr/sqlgrader.git',
     packages=find_packages(),
     install_requires=['mysql-connector-python', 'natsort'],

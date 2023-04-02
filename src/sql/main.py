@@ -37,6 +37,9 @@ class MySqlGenerator:
         self.executor.execute(self.create_file)
         self.inserter.insert(data=db)
 
+    def close_conn(self):
+        self.conn.close()
+        
     def generate_answers(self, db, query, views):
         self._fill_db(db=db)
         self.executor.execute(query)
