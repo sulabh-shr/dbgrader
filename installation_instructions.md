@@ -1,7 +1,7 @@
 # Windows
 
 ### 1. Python Installation
---> Requires python 3.8  
+--> Requires python 3.8 or above
 --> Go to python.org/downloads 
 --> Scroll down to 3.8.10 which has installer package for windows
 
@@ -14,10 +14,11 @@ Link to install https://docs.microsoft.com/en-us/visualstudio/releases/2019/
 Link to install: https://www.mysql.com/downloads/  
 --> Go to **MySQL Community (GPL) Downloads** link towards bottom of page  
 --> Select **MySQL Installer for Windows**
---> Run mysql-installer-web-community-8.0.28.1.msi  
+--> Download the MSI Installer which will look like: mysql-installer-web-community-8.0.28.1.msi
+--> Run the installer
 
 --> Generally use most defaults and do not need configure router or samples  
---> Be sure to write down the username and password, it requires an 8 digit password. You must include this in your credentials.py file.  
+--> Be sure to write down the username and password, it requires an 8 character password. You must include this in your credentials.py file later.
 
 ### 4. Go to project folder
 --> Open command-prompt and go to the project folder using the change directory command.  
